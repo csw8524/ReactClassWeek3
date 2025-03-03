@@ -11,7 +11,7 @@ export default function App() {
     username: "",
     password: "",
   })
-  const [isAuth, setisAuth] = useState(false)
+  const [isAuth, setIsAuth] = useState(false)
   const [products, setProducts] = useState([])
   const productModalRef = useRef(null)
 
@@ -31,7 +31,7 @@ export default function App() {
   const checkAdmin = async () => {
     try {
       await axios.post(`${API_BASE}/api/user/check`)
-      setisAuth(true)
+      setIsAuth(true)
     } catch (err) {
       console.log(err.response.data.message)
     }
@@ -52,7 +52,7 @@ export default function App() {
       const { token, expired } = response.data
       document.cookie = `hexToken=${token}expires=${new Date(expired)}`
       axios.defaults.headers.common.Authorization = token
-      setisAuth(true)
+      setIsAuth(true)
     } catch (error) {
       alert("登入失敗: " + error.response.data.message)
     }
